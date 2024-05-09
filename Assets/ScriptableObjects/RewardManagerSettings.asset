@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c609d6581f1fc409496890d2db7cd1, type: 3}
+  m_Name: RewardManagerSettings
+  m_EditorClassIdentifier: 
+  _bombImageSizes:
+  - 512
+  - 512
+  - 0.34
+  - 0.34
+  - 275
+  - 0
+  _imageSizesSquare:
+  - 512
+  - 512
+  - 0.17
+  - 0.17
+  - 275
+  - 0
+  _imageSizes720_240:
+  - 720
+  - 240
+  - 0.21
+  - 0.21
+  - 270
+  - 0
+  _imageSizes400_225:
+  - 400
+  - 225
+  - 0.34
+  - 0.34
+  - 270
+  - 0
+  _imageSizes328_172:
+  - 328
+  - 172
+  - 0.4
+  - 0.4
+  - 270
+  - 0
+  _imageSizes512_227:
+  - 512
+  - 227
+  - 0.26
+  - 0.26
+  - 270
+  - 0
+  _squareSpecificSizes:
+  - 0.3
+  - 0.2
+  - 0.15
+  _spriteAtlasesSquare:
+  - {fileID: 100100200, guid: 7ad8073be97ac624586ea9d988b6247d, type: 3}
+  - {fileID: 100100200, guid: cd75c4f57638c4d43be3212b1098ef72, type: 3}
+  - {fileID: 100100200, guid: 3965606c0349b874f84ad14b4e209cfd, type: 3}
+  _spriteAtlases720_240:
+  - {fileID: 100100200, guid: f633f2703c5230944a195d2789ea4743, type: 3}
+  - {fileID: 100100200, guid: 2d07a66aeaf709e45836d3fecb9baa37, type: 3}
+  - {fileID: 100100200, guid: ff97ddc564b98874cb1a833d2cbd35c6, type: 3}
+  _spriteAtlases400_225:
+  - {fileID: 100100200, guid: ab33822eaeb729d419cce1512b782613, type: 3}
+  _spriteAtlases328_172:
+  - {fileID: 100100200, guid: f1beabc726c3a30469b1daab6bfb5ac3, type: 3}
+  _spriteAtlases512_227:
+  - {fileID: 100100200, guid: a5cd78e6831eaba4caae99ee8fba1ea5, type: 3}
+  - {fileID: 100100200, guid: 96cfdd9e1682f52479188d8ba0987e50, type: 3}
+  - {fileID: 100100200, guid: 99cd7c95c7124094c899e2091461b4c1, type: 3}
+  _spriteAtlasBomb: {fileID: 100100200, guid: 48d40adb76417f24490afe3e763660ce, type: 3}
+  _maxTierForSuperZone: 3
+  _maxTierForSafeZone: 2
+  _maxTierForBasicZone: 1
