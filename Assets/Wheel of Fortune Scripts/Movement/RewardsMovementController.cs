@@ -38,7 +38,7 @@ namespace WheelOfFortune.Movement.RewardsMovement
             cloneRewardImage.transform.DOMove(_obtainedItemPanel.transform.position, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
             cloneRewardImage.transform.DOScale(cloneRewardImage.transform.localScale * _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration).OnComplete(() =>
             {
-                _buttonManager.EnableItemPanelButton();
+                _buttonManager.SetButtonStatus(ButtonType.ObtainedItemPanelButton, true);
             });
 
             cloneRewardText.transform.DOMove(_rewardTextPanelPos.position, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
@@ -62,8 +62,8 @@ namespace WheelOfFortune.Movement.RewardsMovement
             cloneRewardImage.transform.DOScale(new Vector3(0, 0, 0), _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration).OnComplete(() =>
             {
                 cloneRewardImage.GetComponent<Image>().color = new Color(cloneRewardImage.GetComponent<Image>().color.r, cloneRewardImage.GetComponent<Image>().color.g, cloneRewardImage.GetComponent<Image>().color.b, 0f);
-                _buttonManager.EnableSpinButton();
-                _buttonManager.EnableExitButton();
+                _buttonManager.SetButtonStatus(ButtonType.SpinButton, true);
+                _buttonManager.SetButtonStatus(ButtonType.ExitButton, true);
             });
         }
 
@@ -77,8 +77,8 @@ namespace WheelOfFortune.Movement.RewardsMovement
             {
                 panelReward.GetComponent<Image>().color = new Color(panelReward.GetComponent<Image>().color.r, panelReward.GetComponent<Image>().color.g, panelReward.GetComponent<Image>().color.b, 1f);
                 cloneRewardImage.GetComponent<Image>().color = new Color(cloneRewardImage.GetComponent<Image>().color.r, cloneRewardImage.GetComponent<Image>().color.g, cloneRewardImage.GetComponent<Image>().color.b, 0f);
-                _buttonManager.EnableSpinButton();
-                _buttonManager.EnableExitButton();
+                _buttonManager.SetButtonStatus(ButtonType.SpinButton, true);
+                _buttonManager.SetButtonStatus(ButtonType.ExitButton, true);
             });
             cloneRewardText.transform.DOScale(cloneRewardText.transform.localScale / _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration).OnComplete(() =>
             {

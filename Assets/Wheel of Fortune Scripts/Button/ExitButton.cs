@@ -4,15 +4,23 @@ using WheelOfFortune.Manager.Button;
 
 namespace WheelOfFortune.Buttons
 {
-    public class ExitButton : MonoBehaviour, IPointerDownHandler
+    public class ExitButton : MonoBehaviour, IPointerDownHandler, IButton
     {
-        [SerializeField] private ButtonManager _buttonManager;
         [SerializeField] private GameObject _exitGamePanel;
+
+        public ButtonType buttonType { get ; set ; }
+        private void Awake()
+        {
+            buttonType = ButtonType.ExitButton;
+        }
+
+        public void ChangeButtonState(bool state)
+        {
+            this.enabled = state;
+        }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _buttonManager.DisableExitButton();
-            _buttonManager.DisableSpinButton();
             _exitGamePanel.SetActive(true);
         }
     }

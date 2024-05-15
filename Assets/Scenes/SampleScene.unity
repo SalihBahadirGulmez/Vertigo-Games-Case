@@ -257,6 +257,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133913}
   m_CullTransparentMesh: 1
+--- !u!1 &11307424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11307425}
+  - component: {fileID: 11307426}
+  m_Layer: 5
+  m_Name: GameObject_ObtainedItem_Button
+  m_TagString: Button
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &11307425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11307424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 152157430}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &11307426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11307424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2491f0246bfc8084ea1721a795cb11e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameController: {fileID: 492810998}
+  _obtainedItemPanel: {fileID: 152157429}
 --- !u!1 &12692132
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,14 +848,13 @@ GameObject:
   m_Component:
   - component: {fileID: 152157430}
   - component: {fileID: 152157432}
-  - component: {fileID: 152157434}
   m_Layer: 5
   m_Name: Ui_Panel_ObtainedItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &152157430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -820,6 +869,7 @@ RectTransform:
   m_Children:
   - {fileID: 645005075}
   - {fileID: 293178262}
+  - {fileID: 11307425}
   m_Father: {fileID: 364088394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -835,19 +885,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152157429}
   m_CullTransparentMesh: 1
---- !u!114 &152157434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152157429}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2491f0246bfc8084ea1721a795cb11e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameController: {fileID: 492810998}
 --- !u!1 &185117698
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +921,7 @@ MonoBehaviour:
   _rewardsMovementSettings: {fileID: 11400000, guid: dfb3637b143585d469ba822d16e8efb6, type: 2}
   _rewardTextController: {fileID: 185117703}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
-  _buttonManager: {fileID: 1440667543}
+  _buttonManager: {fileID: 364088395}
   _obtainedItemPanel: {fileID: 152157429}
   _endGamePanel: {fileID: 553987207}
   _endGameRestartButton: {fileID: 204193470}
@@ -907,7 +944,7 @@ MonoBehaviour:
   _spinRotateSettings: {fileID: 11400000, guid: d000be2580bf9fa45912377d90911bb5, type: 2}
   _rewardManager: {fileID: 185117701}
   _gameController: {fileID: 492810998}
-  _buttonManager: {fileID: 1440667543}
+  _buttonManager: {fileID: 364088395}
 --- !u!114 &185117701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,13 +1307,14 @@ GameObject:
   - component: {fileID: 204193474}
   - component: {fileID: 204193472}
   - component: {fileID: 204193476}
+  - component: {fileID: 204193477}
   m_Layer: 5
   m_Name: Ui_Button_EndGame_Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &204193471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1290,7 +1328,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1806806239}
-  m_Father: {fileID: 364088394}
+  m_Father: {fileID: 553987211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1310,8 +1348,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameController: {fileID: 492810998}
-  _endGamePanle: {fileID: 553987207}
-  _leaveButton: {fileID: 1447822530}
 --- !u!114 &204193474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,6 +1430,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!210 &204193477
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204193470}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &220119604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,6 +1828,7 @@ GameObject:
   - component: {fileID: 364088393}
   - component: {fileID: 364088392}
   - component: {fileID: 364088391}
+  - component: {fileID: 364088395}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1874,8 +1923,6 @@ RectTransform:
   - {fileID: 152157430}
   - {fileID: 553987211}
   - {fileID: 606456356}
-  - {fileID: 204193471}
-  - {fileID: 1447822531}
   - {fileID: 453589687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1884,6 +1931,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &364088395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364088390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8474be782964ae45a963ea6d28bca12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &432480392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,6 +2191,9 @@ MonoBehaviour:
   _rewardTextController: {fileID: 185117703}
   _upperPanelTextController: {fileID: 1641429779}
   _upperPanelMovementController: {fileID: 1641429778}
+  _buttonManager: {fileID: 364088395}
+  _obtainedItemPanel: {fileID: 152157429}
+  _endGamePanle: {fileID: 553987207}
   _parentSpinBaseTransform: {fileID: 185117702}
   _bronzeSpinTransform:
   - {fileID: 258207868}
@@ -2291,6 +2353,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 781708315}
+  - {fileID: 204193471}
+  - {fileID: 1447822531}
   m_Father: {fileID: 364088394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2460,7 +2524,7 @@ GameObject:
   - component: {fileID: 651831411}
   m_Layer: 5
   m_Name: Ui_Image_Spin_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4276,53 +4340,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382824388}
   m_CullTransparentMesh: 1
---- !u!1 &1440667542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1440667544}
-  - component: {fileID: 1440667543}
-  m_Layer: 0
-  m_Name: Button Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1440667543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440667542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8474be782964ae45a963ea6d28bca12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spinButton: {fileID: 651831411}
-  _exitButton: {fileID: 1889840902}
-  _obtainedItemPanelButton: {fileID: 152157434}
---- !u!4 &1440667544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440667542}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 245.12886, y: 547.3939, z: -6.2749376}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1447372782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4371,13 +4388,14 @@ GameObject:
   - component: {fileID: 1447822533}
   - component: {fileID: 1447822532}
   - component: {fileID: 1447822535}
+  - component: {fileID: 1447822536}
   m_Layer: 5
   m_Name: Ui_Button_EndGame_Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1447822531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4391,7 +4409,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7133914}
-  m_Father: {fileID: 364088394}
+  m_Father: {fileID: 553987211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4492,6 +4510,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8c826eb6c5f5246a451e3a24f69720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!210 &1447822536
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447822530}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &1448591866
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,7 +5323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08b3813d4691ba478d988129c3686f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonManager: {fileID: 1440667543}
+  _buttonManager: {fileID: 364088395}
   _exitGamePanel: {fileID: 453589686}
 --- !u!114 &1609886360
 MonoBehaviour:
@@ -5432,7 +5462,6 @@ MonoBehaviour:
   _upperPanelRoundInfo: {fileID: 1526337072}
   _upperPanelRoundInfoNextRoundPositin: {fileID: 869236973}
   _upperPanelRoundInfoPreviousRoundPosition: {fileID: 1794036109}
-  _upperPanelRoundInfoMoveDistance: 0
 --- !u!114 &1641429779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6310,7 +6339,7 @@ GameObject:
   - component: {fileID: 1889840902}
   m_Layer: 5
   m_Name: Ui_Button_Exit
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6429,7 +6458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58367dd81778ebe4f94ee8b14487c046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonManager: {fileID: 1440667543}
+  _buttonManager: {fileID: 364088395}
   _exitGamePanel: {fileID: 453589686}
 --- !u!1 &1894026172
 GameObject:
@@ -7065,4 +7094,3 @@ SceneRoots:
   - {fileID: 364088394}
   - {fileID: 220119607}
   - {fileID: 492810999}
-  - {fileID: 1440667544}

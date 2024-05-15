@@ -15,7 +15,8 @@ namespace WheelOfFortune.Movement.SpinRotate
 
         public void RotateSpin()
         {
-            _buttonManager.DisableExitButton();
+            _buttonManager.SetButtonStatus(ButtonType.SpinButton, false);
+            _buttonManager.SetButtonStatus(ButtonType.ExitButton, false);
             int tempRandomRotation = Random.Range(_spinRotateSettings.SpinRotateAngleMin, _spinRotateSettings.SpinRotateAngleMax);
             tempRandomRotation -= tempRandomRotation % 45;
             int tempRewardSlotNum = (tempRandomRotation / 45) % 8;

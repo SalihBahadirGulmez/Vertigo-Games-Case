@@ -12,8 +12,16 @@ namespace WheelOfFortune.Buttons
         public void OnPointerDown(PointerEventData eventData)
         {
             _exitGamePanel.SetActive(false);
-            _buttonManager.EnableExitButton();
-            _buttonManager.EnableSpinButton();
+        }
+        private void OnEnable()
+        {
+            _buttonManager.SetButtonStatus(ButtonType.ExitButton, false);
+            _buttonManager.SetButtonStatus(ButtonType.SpinButton, false);
+        }
+        private void OnDisable()
+        {
+            _buttonManager.SetButtonStatus(ButtonType.ExitButton, true);
+            _buttonManager.SetButtonStatus(ButtonType.SpinButton, true);
         }
     }
 }

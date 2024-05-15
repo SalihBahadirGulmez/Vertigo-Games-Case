@@ -1,37 +1,37 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using WheelOfFortune.Buttons;
 
 namespace WheelOfFortune.Manager.Button
 { 
+    public enum ButtonType
+    {
+        ExitButton,
+        KeepWinningButton,
+        LeaveGameButton,
+        ObtainedItemPanelButton,
+        RestartButton,
+        SpinButton
+    }
+    public interface IButton
+    {
+        void ChangeButtonState(bool state);
+        ButtonType buttonType { get; set; }
+    }
+
     public class ButtonManager : MonoBehaviour
     {
-        [SerializeField] private SpinButton _spinButton;
-        [SerializeField] private ExitButton _exitButton;
-        [SerializeField] private ObtainedItemPanelButton _obtainedItemPanelButton;
 
-        public void DisableSpinButton()
+        [SerializeField] private List<IButton> _buttons = new List<IButton>();
+
+        private void Awake()
         {
-            _spinButton.enabled = false;
+            _buttons = GetComponentsInChildren<IButton>().ToList();
         }
-        public void EnableSpinButton()
+        public void SetButtonStatus(ButtonType buttonType, bool status)
         {
-            _spinButton.enabled = true;
-        }
-        public void DisableExitButton()
-        {
-            _exitButton.enabled = false;
-        }
-        public void EnableExitButton()
-        {
-            _exitButton.enabled = true;
-        }
-        public void DisableItemPanelButton()
-        {
-            _obtainedItemPanelButton.enabled = false;
-        }
-        public void EnableItemPanelButton()
-        {
-            _obtainedItemPanelButton.enabled = true;
+            IButton desiredButton = _buttons.Find(x => x.buttonType == buttonType);
+            desiredButton.ChangeButtonState(status);
         }
 
     }

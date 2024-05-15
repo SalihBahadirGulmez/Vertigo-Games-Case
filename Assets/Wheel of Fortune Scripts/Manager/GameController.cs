@@ -7,6 +7,7 @@ using WheelOfFortune.Movement.UpperPanel;
 using WheelOfFortune.Texts.Reward;
 using WheelOfFortune.Texts.UpperPanel;
 using WheelOfFortune.Manager.Reward;
+using WheelOfFortune.Manager.Button;
 
 namespace WheelOfFortune.Manager.GameManager
 {
@@ -19,7 +20,10 @@ namespace WheelOfFortune.Manager.GameManager
         [SerializeField] private RewardTextController _rewardTextController;
         [SerializeField] private UpperPanelTextController _upperPanelTextController;
         [SerializeField] private UpperPanelMovementController _upperPanelMovementController;
+        [SerializeField] private ButtonManager _buttonManager;
 
+        [SerializeField] private GameObject _obtainedItemPanel;
+        [SerializeField] private GameObject _endGamePanle;
         [SerializeField] private Transform _parentSpinBaseTransform;
 
         [SerializeField] private GameObject[] _bronzeSpinTransform;
@@ -45,6 +49,8 @@ namespace WheelOfFortune.Manager.GameManager
 
         public void PrepareNewRound()
         {
+            _buttonManager.SetButtonStatus(ButtonType.ObtainedItemPanelButton, false);
+            _obtainedItemPanel.SetActive(false);
             _gameControllerData.CurrentRound += 1;
             _parentSpinBaseTransform.rotation = Quaternion.Euler(0, 0, 0);
             PrepareSpinBase();
@@ -59,6 +65,7 @@ namespace WheelOfFortune.Manager.GameManager
 
         public void PrepareNewGame()
         {
+            _endGamePanle.SetActive(false);
             _rewardsMovementController.MoveAfterRestrart(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
             _gameControllerData.CurrentRound = 1;
             _parentSpinBaseTransform.rotation = Quaternion.Euler(0, 0, 0);
