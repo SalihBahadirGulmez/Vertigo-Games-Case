@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WheelOfFortune.Texts.Reward
@@ -8,24 +6,24 @@ namespace WheelOfFortune.Texts.Reward
 
     public class RewardTextSettings : ScriptableObject
     {
-        [SerializeField] private int _minMultiplierForCash = 50;
-        [SerializeField] private int _maxMultiplierForCash = 200;
-        [SerializeField] private int _minMultiplierForGold = 1;
-        [SerializeField] private int _maxMultiplierForGold = 4;
-        [SerializeField] private int _minValueForFragments = 5;
-        [SerializeField] private int _maxValueForFragments = 10;
-        [SerializeField] private int _maxMultiplierForRound = 20;
+        [SerializeField] private int _threshold = 1000;
+        [SerializeField] private string _thresholdText = "K";
+
+        [SerializeField] private int _maxIncreaseRate = 5;
+        [SerializeField] private int _minIncreaseRate = 1;
+        [SerializeField] private int _maxIncreaseRateThreshold = 1000;
 
 
+        public int Threshold { get { return _threshold; } }
+        public string ThresholdText { get { return _thresholdText; } }
+        public int MaxIncreaseRate { get { return _maxIncreaseRate; } }
+        public int MinIncreaseRate { get { return _minIncreaseRate; } }
+        public int MaxIncreaseRateThreshold { get { return _maxIncreaseRateThreshold; } }
 
-        public int MinMultiplierForCash { get { return _minMultiplierForCash; } }
-        public int MaxMultiplierForCash { get { return _maxMultiplierForCash; } }
-        public int MinMultiplierForGold { get { return _minMultiplierForGold; } }
-        public int MaxMultiplierForGold { get { return _maxMultiplierForGold; } }
-        public int MinValueForFragments { get { return _minValueForFragments; } }
-        public int MaxValueForFragments { get { return _maxValueForFragments; } }
-        public int MaxMultiplierForRound { get { return _maxMultiplierForRound; } }
-
+        public int IncreaseRateCalculator(int currentValue, int desiredValue)
+        {
+            return ((desiredValue - currentValue) / MaxIncreaseRateThreshold) * (MaxIncreaseRate - MinIncreaseRate) + MinIncreaseRate;
+        }
 
     }
 }
