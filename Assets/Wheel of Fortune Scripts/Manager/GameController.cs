@@ -21,6 +21,7 @@ namespace WheelOfFortune.Manager.GameManager
         [SerializeField] private UpperPanelTextController _upperPanelTextController;
         [SerializeField] private UpperPanelMovementController _upperPanelMovementController;
         [SerializeField] private ButtonManager _buttonManager;
+        [SerializeField] private GameSettings _gameSettings;
 
         [SerializeField] private GameObject _obtainedItemPanel;
         [SerializeField] private GameObject _endGamePanle;
@@ -42,7 +43,7 @@ namespace WheelOfFortune.Manager.GameManager
             _upperPanelTextController.PrepareUpperPanelForNewGame();
             PrepareSpinBase();
             FindNextZone();
-            _rewardImageController.SizeAndSpriteAdjustment(_rewardImageController._spinRewards);
+            _rewardImageController.RandomSpinRewardAdjustment();
             _rewardTextController.RewardQuantityCalculator();
         }
 
@@ -59,7 +60,7 @@ namespace WheelOfFortune.Manager.GameManager
             _rewardsMovementController.MoveCollectedItemPanel(_cloneRewardImageGameObject, _gameControllerData.LastCollectedRewardImageGameobject, _cloneRewardTextGameObject, _gameControllerData.LastCollectedRewardTextGameobject);
             _upperPanelTextController.PrepareUpperPanelForNextRound();
             _upperPanelMovementController.MoveNextRound();
-            _rewardImageController.SizeAndSpriteAdjustment(_rewardImageController._spinRewards);
+            _rewardImageController.RandomSpinRewardAdjustment();
             _rewardTextController.RewardQuantityCalculator();
         }
 
@@ -74,7 +75,7 @@ namespace WheelOfFortune.Manager.GameManager
             _upperPanelTextController.PrepareUpperPanelForNewGame();
             _rewardImageController._currentSpinRewardsData.Clear();
             DleteCollectedRewards(_rewardManager._collectedRewardsData);
-            _rewardImageController.SizeAndSpriteAdjustment(_rewardImageController._spinRewards);
+            _rewardImageController.RandomSpinRewardAdjustment();
             _rewardTextController.RewardQuantityCalculator();
         }
 
@@ -108,7 +109,7 @@ namespace WheelOfFortune.Manager.GameManager
 
         public void PrepareSpinBase()
         {
-            if (_gameControllerData.CurrentRound % 30 == 0)
+            if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
             {
                 for (int i = 0; i < _bronzeSpinTransform.Length; i++)
                 {
@@ -119,7 +120,7 @@ namespace WheelOfFortune.Manager.GameManager
                     _goldSpinTransform[i].SetActive(true);
                 }
             }
-            else if (_gameControllerData.CurrentRound % 5 == 0)
+            else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
             {
                 for (int i = 0; i < _bronzeSpinTransform.Length; i++)
                 {
@@ -149,13 +150,13 @@ namespace WheelOfFortune.Manager.GameManager
 
         public void FindNextZone()
         {
-            if(_gameControllerData.CurrentRound % 30 == 0) 
+            if(_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0) 
             {
-                _nextSuperZoneText.text = (_gameControllerData.CurrentRound + 30).ToString();
-                _nextSafeZoneText.text = (_gameControllerData.CurrentRound + 5).ToString();
-            }else if (_gameControllerData.CurrentRound % 5 == 0)
+                _nextSuperZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SuperZonePeriod).ToString();
+                _nextSafeZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SafeZonePeriod).ToString();
+            }else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
             {
-                _nextSafeZoneText.text = (_gameControllerData.CurrentRound + 5).ToString();
+                _nextSafeZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SafeZonePeriod).ToString();
             }
         }
 

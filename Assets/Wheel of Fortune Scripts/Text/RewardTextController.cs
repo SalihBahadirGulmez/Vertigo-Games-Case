@@ -10,7 +10,9 @@ namespace WheelOfFortune.Texts.Reward
     public class RewardTextController : MonoBehaviour
     {
 
+        [SerializeField] private List<RewardQuantitySettings> _rewardQuantitySettings;
         [SerializeField] private RewardTextSettings _rewardTextSettings;
+
         [SerializeField] private GameControllerData _gameControllerData;
         [SerializeField] private RewardImageController _rewardImageController;
 
@@ -24,39 +26,18 @@ namespace WheelOfFortune.Texts.Reward
         {
             for (int i = 0; i < _rewardImageController._currentSpinRewardsData.Count; i++)
             {
-                if (_rewardImageController._currentSpinRewardsData[i].Name == "UI_icon_cash")
-                {
-                    int tempQuantity = Random.Range(_rewardTextSettings.MinMultiplierForCash * Mathf.Clamp(_gameControllerData.CurrentRound, 0, _rewardTextSettings.MaxMultiplierForRound), _rewardTextSettings.MaxMultiplierForCash * Mathf.Clamp(_gameControllerData.CurrentRound, 0, _rewardTextSettings.MaxMultiplierForRound));
-                    _rewardImageController._currentSpinRewardsData[i].Quantity = tempQuantity;
-                }
-                else if (_rewardImageController._currentSpinRewardsData[i].Name == "UI_icon_gold")
-                {
-                    int tempQuantity = Random.Range(_rewardTextSettings.MinMultiplierForGold * Mathf.Clamp(_gameControllerData.CurrentRound, 0, _rewardTextSettings.MaxMultiplierForRound), _rewardTextSettings.MaxMultiplierForGold * Mathf.Clamp(_gameControllerData.CurrentRound, 0, _rewardTextSettings.MaxMultiplierForRound));
-                    _rewardImageController._currentSpinRewardsData[i].Quantity = tempQuantity;
-                }
-                else if (_rewardImageController._currentSpinRewardsData[i].Name == "ui_card_icon_death")
-                {
-                    _rewardImageController._currentSpinRewardsData[i].Quantity = 0;
-                }
-                else if (_rewardImageController._currentSpinRewardsData[i].AtlasSizeNum == 0 && _rewardImageController._currentSpinRewardsData[i].AtlasNameNum !=0)
-                {
-                    int tempQuantity = Random.Range(_rewardTextSettings.MinValueForFragments, _rewardTextSettings.MaxValueForFragments);
-                    _rewardImageController._currentSpinRewardsData[i].Quantity = tempQuantity;
-                }
-                else
-                {
-                    _rewardImageController._currentSpinRewardsData[i].Quantity = 1;
-                }
+                RewardData tempData = _rewardImageController._currentSpinRewardsData[i];
+                tempData.Quantity = _rewardQuantitySettings.Find(x => x.ItemType == tempData.ItemUiProperties.ItemType).RandomQuantityCalculator(_gameControllerData.CurrentRound);
 
-                RewardTextQuantityAdjustment(_spinRewardTexts[i], _rewardImageController._currentSpinRewardsData[i].Quantity);         
+                RewardTextQuantityAdjustment(_spinRewardTexts[i], tempData.Quantity);         
             }
         }
 
         public void RewardTextQuantityAdjustment(TextMeshProUGUI text,float value)
         {
-            if (value >= 1000)
+            if (value >= _rewardTextSettings.Threshold)
             {
-                text.text = "x" + Mathf.Round(value / 100)/10 + "K";
+                text.text = "x" + Mathf.Round(value / (_rewardTextSettings.Threshold / 10)) /10 + _rewardTextSettings.ThresholdText;
             }
             else if (value == 0)
             {
@@ -84,29 +65,27 @@ namespace WheelOfFortune.Texts.Reward
         }
 
 
-        public IEnumerator UpdateTextValue(TextMeshProUGUI text, int currentValue, int lastValue)
+        public IEnumerator UpdateTextValue(TextMeshProUGUI text, int currentValue, int desiredValue)
         {
-            int tempIncreaseAmount = FindIncreaseAmount(currentValue, lastValue);
-            while(currentValue < lastValue)
+            int tempIncreaseAmount = FindIncreaseAmount(currentValue, desiredValue);
+            while(currentValue < desiredValue)
             {
-                if(lastValue - currentValue < tempIncreaseAmount) currentValue = lastValue;
+                if(desiredValue - currentValue < tempIncreaseAmount) currentValue = desiredValue;
                 else currentValue += tempIncreaseAmount;
                 RewardTextQuantityAdjustment(text, currentValue);
                 yield return null;
-
             }
         }
 
-        public int FindIncreaseAmount(int currentValue, int lastValue)
+        public int FindIncreaseAmount(int currentValue, int desiredValue)
         {
-            if(lastValue - currentValue > 1000)
+            if(desiredValue - currentValue > _rewardTextSettings.MaxIncreaseRateThreshold)
             {
-                return 5;
-            }else if(lastValue - currentValue > 500)
+                return _rewardTextSettings.MaxIncreaseRate;
+            }else
             {
-                return 2;
+                return _rewardTextSettings.IncreaseRateCalculator(currentValue, desiredValue);
             }
-            return 1;
         }
     }
 }

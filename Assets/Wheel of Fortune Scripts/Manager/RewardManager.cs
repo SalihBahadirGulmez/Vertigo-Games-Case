@@ -27,14 +27,16 @@ namespace WheelOfFortune.Manager.Reward
             _rewardImageController.CloneImage(_cloneRewardImage, _rewardImageController._spinRewards[slotNum]);
             _rewardTextController.CloneText(_cloneRewardText, _rewardTextController._spinRewardTexts[slotNum]);
 
-            if (_rewardImageController._currentSpinRewardsData[slotNum].Name == _rewardImageSettings._bombImage.Name)
+            string rewardName = _rewardImageController._currentSpinRewardsData[slotNum].ItemUiProperties.Name;
+
+            if (_rewardImageController._bombUiProperties.Name == rewardName)
             {
                 _gameControllerData.SpinResult = "Lose";
                 return;
             }
             for (int i = 0; i < _collectedRewardsData.Count; i++)
             {
-                if (_collectedRewardsData[i].Name == _rewardImageController._currentSpinRewardsData[slotNum].Name)
+                if (_collectedRewardsData[i].ItemUiProperties.Name == rewardName)
                 {
                     _gameControllerData.SpinResult = "WinSameItem";
                     _gameControllerData.LastCollectedRewardImageGameobject = _collectedRewardsData[i].ImageGameObject;

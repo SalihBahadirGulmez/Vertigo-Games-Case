@@ -1006,7 +1006,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba9b0e22877b83478260aa73a224b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rewardTextSettings: {fileID: 11400000, guid: be08ac180087a454da8f9d7abcf675b4, type: 2}
+  _rewardQuantitySettings:
+  - {fileID: 11400000, guid: 9603e4da1a712f341be834d40b553333, type: 2}
+  - {fileID: 11400000, guid: dd388d71377a41c45b334342215f2f63, type: 2}
+  - {fileID: 11400000, guid: 9b603a2f27aaa0d41b12ae13e8b3a55f, type: 2}
+  - {fileID: 11400000, guid: c9bf6d13c20c20146a43270d7bc2fc32, type: 2}
+  - {fileID: 11400000, guid: 80671c2ff0f3c7d4f932098361ae9680, type: 2}
+  - {fileID: 11400000, guid: a3d3f03ceaa377346bb75d9f13aaf7a8, type: 2}
+  _rewardTextSettings: {fileID: 11400000, guid: cbaae98a0f494144bae044bfc866f508, type: 2}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
   _rewardImageController: {fileID: 185117704}
   _spinRewardTexts:
@@ -1033,8 +1040,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewardImageSettings: {fileID: 11400000, guid: 935164980aa522746a09cc74ef574317, type: 2}
+  _allRewardsUiProperties:
+  - {fileID: 11400000, guid: da7afbe1f23ca9041bb6ea16fcb451fb, type: 2}
+  - {fileID: 11400000, guid: 2b02253971530bf47be06e82f4d80c1f, type: 2}
+  - {fileID: 11400000, guid: 02744217d64fe184a885582a16baad4d, type: 2}
+  - {fileID: 11400000, guid: 0c3b9f79de7a59142beb6ce2ee5166ac, type: 2}
+  - {fileID: 11400000, guid: 5ebcafcee2d118e41b2a5e82774537a9, type: 2}
+  - {fileID: 11400000, guid: 455fd205665286e4a92f492b6a8a7fe3, type: 2}
+  - {fileID: 11400000, guid: ed0597ab309d5314d889a2d81d615cbe, type: 2}
+  - {fileID: 11400000, guid: 71d8ac760871f8a45aa84d064c885cab, type: 2}
+  - {fileID: 11400000, guid: 8947890213c7bae49aee3a61c366d820, type: 2}
+  - {fileID: 11400000, guid: 333764d727e7ae841a8e53e10117632c, type: 2}
+  - {fileID: 11400000, guid: 86acbc7ec86e3234baf0a07e6d170016, type: 2}
+  - {fileID: 11400000, guid: 8f7b27ec25c0ff14e96e1cc144312b42, type: 2}
+  - {fileID: 11400000, guid: f48a40470fb1dce4a93fa4a14704cfd7, type: 2}
+  - {fileID: 11400000, guid: f61417ac2bf59a144878efd06de4bd27, type: 2}
+  - {fileID: 11400000, guid: 0c57a1d9bb1faa74abc9311f9ed4f3a8, type: 2}
+  - {fileID: 11400000, guid: 44a45076a138872498c266d272a386ee, type: 2}
+  - {fileID: 11400000, guid: c408cadb3547ec347920dded4f66b2ed, type: 2}
+  - {fileID: 11400000, guid: 4f7c7c27407e7b0469761326fa26a907, type: 2}
+  - {fileID: 11400000, guid: c0d4c3536c447f94ebdd753e1fce1614, type: 2}
+  - {fileID: 11400000, guid: 949da79d6693fca4e9e150629d02ca18, type: 2}
+  - {fileID: 11400000, guid: c7122badcf6f86e419a34db8af4c158b, type: 2}
+  - {fileID: 11400000, guid: 7c9b0ef83c2930f43a4f6edc6e6bb08e, type: 2}
+  - {fileID: 11400000, guid: 999953102d7992f4ab9cc668513ca22a, type: 2}
+  - {fileID: 11400000, guid: 4874d34b3cd19dc498c4ffe9f7fa0835, type: 2}
+  - {fileID: 11400000, guid: 21cf77be04dfc7f44bf33d889a0c0911, type: 2}
+  - {fileID: 11400000, guid: 246490136e7080244b46307a78e8498e, type: 2}
+  - {fileID: 11400000, guid: 5df1cda71a115be4e93c4c22dc0c6c7d, type: 2}
+  - {fileID: 11400000, guid: 13c227bba0fd2c546b3a7aa359b11e3b, type: 2}
+  - {fileID: 11400000, guid: 156bacddf79d0b847a583d080395d0cd, type: 2}
+  - {fileID: 11400000, guid: e44ef43da644c324ca65f7c53e5dcc8b, type: 2}
+  - {fileID: 11400000, guid: c2352cf5fd2ebd04a9de52e3e8d867cf, type: 2}
+  - {fileID: 11400000, guid: 0ff363c4c09747144848902679bf36e9, type: 2}
+  - {fileID: 11400000, guid: 91692bb9d096dae4c8eab4a0e5e761a1, type: 2}
+  - {fileID: 11400000, guid: 62e499b16fe58aa4e8995a4e939fe295, type: 2}
+  - {fileID: 11400000, guid: bb176a54a4fe7774d9488612239e1a46, type: 2}
+  _bombUiProperties: {fileID: 11400000, guid: 8fcd7fc077bfee04f9e573f0ea7d3e97, type: 2}
   _rewardManagerSettings: {fileID: 11400000, guid: 5cfaea07c038bd74d899faa9e5066a90, type: 2}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
+  _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
   _spinRewards:
   - {fileID: 1464231280}
   - {fileID: 1503988086}
@@ -1046,6 +1091,9 @@ MonoBehaviour:
   - {fileID: 1572998256}
   _collectedItemImagePrefab: {fileID: 5765278199435501163, guid: ec108d3f476ace3448cb061cdcc3a82f, type: 3}
   scrollViewContent: {fileID: 1340066066}
+  _rewardsUiPropertiesTier1: []
+  _rewardsUiPropertiesTier2: []
+  _rewardsUiPropertiesTier3: []
 --- !u!1 &185805215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,6 +2240,7 @@ MonoBehaviour:
   _upperPanelTextController: {fileID: 1641429779}
   _upperPanelMovementController: {fileID: 1641429778}
   _buttonManager: {fileID: 364088395}
+  _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
   _obtainedItemPanel: {fileID: 152157429}
   _endGamePanle: {fileID: 553987207}
   _parentSpinBaseTransform: {fileID: 185117702}
@@ -6458,7 +6507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58367dd81778ebe4f94ee8b14487c046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonManager: {fileID: 364088395}
   _exitGamePanel: {fileID: 453589686}
 --- !u!1 &1894026172
 GameObject:
