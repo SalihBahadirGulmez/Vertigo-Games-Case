@@ -1077,7 +1077,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62e499b16fe58aa4e8995a4e939fe295, type: 2}
   - {fileID: 11400000, guid: bb176a54a4fe7774d9488612239e1a46, type: 2}
   _bombUiProperties: {fileID: 11400000, guid: 8fcd7fc077bfee04f9e573f0ea7d3e97, type: 2}
-  _rewardManagerSettings: {fileID: 11400000, guid: 5cfaea07c038bd74d899faa9e5066a90, type: 2}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
   _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
   _spinRewards:
@@ -1091,9 +1090,10 @@ MonoBehaviour:
   - {fileID: 1572998256}
   _collectedItemImagePrefab: {fileID: 5765278199435501163, guid: ec108d3f476ace3448cb061cdcc3a82f, type: 3}
   scrollViewContent: {fileID: 1340066066}
-  _rewardsUiPropertiesTier1: []
-  _rewardsUiPropertiesTier2: []
-  _rewardsUiPropertiesTier3: []
+  _itemsByTier:
+  - {fileID: 11400000, guid: 34db9ce65df090b4993f2f5a8482425d, type: 2}
+  - {fileID: 11400000, guid: 2f2562f5b2e1c9e49995005c2b59c7a3, type: 2}
+  - {fileID: 11400000, guid: b94b71be72bbb6a4580814368ed4427a, type: 2}
 --- !u!1 &185805215
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,7 +6158,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1323132030}
   m_HandleRect: {fileID: 1323132029}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

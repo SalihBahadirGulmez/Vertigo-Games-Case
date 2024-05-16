@@ -22,13 +22,12 @@ namespace WheelOfFortune.Manager.Reward
         [SerializeField] internal List<TextMeshProUGUI> _collectedRewardsTexts = new List<TextMeshProUGUI>();
 
 
-        public void FindAndGetReward(int slotNum)
+        public void FindAndCollectReward(int slotNum)
         {
             _rewardImageController.CloneImage(_cloneRewardImage, _rewardImageController._spinRewards[slotNum]);
             _rewardTextController.CloneText(_cloneRewardText, _rewardTextController._spinRewardTexts[slotNum]);
 
             string rewardName = _rewardImageController._currentSpinRewardsData[slotNum].ItemUiProperties.Name;
-
             if (_rewardImageController._bombUiProperties.Name == rewardName)
             {
                 _gameControllerData.SpinResult = "Lose";

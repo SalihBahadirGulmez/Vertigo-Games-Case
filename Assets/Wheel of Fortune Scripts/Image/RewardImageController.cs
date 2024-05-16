@@ -21,21 +21,32 @@ namespace WheelOfFortune.Images.Reward
         [SerializeField] private GameObject _collectedItemImagePrefab;
         [SerializeField] private Transform scrollViewContent;
 
-        [SerializeField] internal List<ItemUiProperties> _rewardsUiPropertiesTier1 = new List<ItemUiProperties>();
-        [SerializeField] internal List<ItemUiProperties> _rewardsUiPropertiesTier2 = new List<ItemUiProperties>();
-        [SerializeField] internal List<ItemUiProperties> _rewardsUiPropertiesTier3 = new List<ItemUiProperties>();
-
+        [SerializeField] internal List<ItemsByTier> _itemsByTier = new List<ItemsByTier>();
 
         private void Start()
         {
-            _rewardsUiPropertiesTier1 = _allRewardsUiProperties.FindAll(x => x.Tier == 1);
-            _rewardsUiPropertiesTier2 = _allRewardsUiProperties.FindAll(x => x.Tier == 2);
-            _rewardsUiPropertiesTier3 = _allRewardsUiProperties.FindAll(x => x.Tier == 3);
+            for (int i = 0; i < _itemsByTier.Count; i++)
+            {
+                _itemsByTier[i].ItemsUiProperties = _allRewardsUiProperties.FindAll(x => x.Tier == _itemsByTier[i].Tier);
+            }
         }
 
         public void RandomSpinRewardAdjustment()
         {
             int tampBombPosition = Random.Range(0, _spinRewards.Length);
+            ItemsByTier tempItems;
+            if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
+            {
+                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforSuperZone);
+            }
+            else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
+            {
+                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforSafeZone);
+            }
+            else
+            {
+                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforNormalZone);
+            }
             for (int i = 0; i < _spinRewards.Length; i++)
             {
                 if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod != 0 && tampBombPosition == i)
@@ -44,24 +55,9 @@ namespace WheelOfFortune.Images.Reward
                     SpriteAdjustment(_spinRewards[i], _bombUiProperties);
                     continue;
                 }
-                if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
-                {
-                    int tempRandomSizeNum = Random.Range(0, _rewardsUiPropertiesTier3.Count);
-                    ImageSizeAdjustment(_spinRewards[i], _rewardsUiPropertiesTier3[tempRandomSizeNum]);
-                    SpriteAdjustment(_spinRewards[i], _rewardsUiPropertiesTier3[tempRandomSizeNum]);
-                }
-                else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
-                {
-                    int tempRandomSizeNum = Random.Range(0, _rewardsUiPropertiesTier2.Count);
-                    ImageSizeAdjustment(_spinRewards[i], _rewardsUiPropertiesTier2[tempRandomSizeNum]);
-                    SpriteAdjustment(_spinRewards[i], _rewardsUiPropertiesTier2[tempRandomSizeNum]);
-                }
-                else
-                {
-                    int tempRandomSizeNum = Random.Range(0, _rewardsUiPropertiesTier1.Count);
-                    ImageSizeAdjustment(_spinRewards[i], _rewardsUiPropertiesTier1[tempRandomSizeNum]);
-                    SpriteAdjustment(_spinRewards[i], _rewardsUiPropertiesTier1[tempRandomSizeNum]);
-                }
+                int tempRandomSizeNum = Random.Range(0, tempItems.ItemsUiProperties.Count);
+                ImageSizeAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomSizeNum]);
+                SpriteAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomSizeNum]);
             }
         }
 

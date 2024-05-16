@@ -20,7 +20,7 @@ namespace WheelOfFortune.Movement.SpinRotate
             int tempRandomRotation = Random.Range(_spinRotateSettings.SpinRotateAngleMin, _spinRotateSettings.SpinRotateAngleMax);
             tempRandomRotation -= tempRandomRotation % 45;
             int tempRewardSlotNum = (tempRandomRotation / 45) % 8;
-            _rewardManager.FindAndGetReward(tempRewardSlotNum);
+            _rewardManager.FindAndCollectReward(tempRewardSlotNum);
             gameObject.transform.DORotate(new Vector3(0, 0, tempRandomRotation), _spinRotateSettings.SpinRotateDuration, RotateMode.LocalAxisAdd).OnComplete(StartAfterRotation);
         }
 
