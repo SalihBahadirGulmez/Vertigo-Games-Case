@@ -5252,13 +5252,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upperPanelMovementController: {fileID: 1641429778}
-  _upperPanelTextData: {fileID: 11400000, guid: ce26341b2db666747860210ef45d3e54, type: 2}
+  _upperPanelSettings: {fileID: 11400000, guid: ce26341b2db666747860210ef45d3e54, type: 2}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
-  _upperPanelTextGameObjects: []
+  _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
+  _upperPanelTexts: []
   _upperPanelTextPrefab: {fileID: 4072356257443549390, guid: ed328fba211e6634ab309981bd9e9652, type: 3}
   _upperPanelRoundInfo: {fileID: 1526337072}
   _upperPanelPosition: {fileID: 1641429775}
   _currentRoundBgImage: {fileID: 611197058}
+  _basicZoneTextSettings: {fileID: 11400000, guid: 1edc75bce43452541b5593d7f07b9a18, type: 2}
+  _safeZoneTextSettings: {fileID: 11400000, guid: 2dd544d943c6e1c4d84ec291dd2da71f, type: 2}
+  _superZoneTextSettings: {fileID: 11400000, guid: 7aadac6838c523f40980fc5f6d4de7ac, type: 2}
 --- !u!114 &1641429780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5886,7 +5890,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1323132030}
   m_HandleRect: {fileID: 1323132029}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

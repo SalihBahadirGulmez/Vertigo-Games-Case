@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 686913af912837d4dbe7ddd003ad0a4b, type: 3}
-  m_Name: UpperPanleTextData
+  m_Name: UpperPanelSettings
   m_EditorClassIdentifier: 
   _initialTextCount: 9
   _maxTextCount: 20

@@ -12,96 +12,100 @@ namespace WheelOfFortune.Texts.UpperPanel
     {
         [SerializeField] private UpperPanelMovementController _upperPanelMovementController;
 
-
-        [SerializeField] private UpperPanleTextData _upperPanelTextData;
+        [SerializeField] private UpperPanelSettings _upperPanelSettings;
         [SerializeField] private GameControllerData _gameControllerData;
-        [SerializeField] private List<GameObject> _upperPanelTextGameObjects = new List<GameObject>();
+        [SerializeField] private GameSettings _gameSettings;
+        [SerializeField] private List<TextMeshProUGUI> _upperPanelTexts = new List<TextMeshProUGUI>();
 
         [SerializeField] private GameObject _upperPanelTextPrefab;
         [SerializeField] private Transform _upperPanelRoundInfo;
         [SerializeField] private Transform _upperPanelPosition;
         [SerializeField] private Image _currentRoundBgImage;
 
+        [SerializeField] private UpperPanelTextSettings _basicZoneTextSettings;
+        [SerializeField] private UpperPanelTextSettings _safeZoneTextSettings;
+        [SerializeField] private UpperPanelTextSettings _superZoneTextSettings;
+
         public void PrepareUpperPanelForNextRound()
         {
 
-            if (_upperPanelTextGameObjects.Count >= _upperPanelTextData.MaxTextCount)
+            if (_upperPanelTexts.Count >= _upperPanelSettings.MaxTextCount)
             {
-                Destroy(_upperPanelTextGameObjects[_upperPanelTextGameObjects.Count - _upperPanelTextData.MaxTextCount]);
+                Destroy(_upperPanelTexts[_upperPanelTexts.Count - _upperPanelSettings.MaxTextCount]);
                 _upperPanelMovementController.AdjustPanelPosition();
             }
-            _upperPanelTextGameObjects.Add(AddNewTextToUpperPanel());
+            _upperPanelTexts.Add(AddNewTextToUpperPanel());
             AdjustCurrentRoundTextAndImage();
         }
 
-        public GameObject AddNewTextToUpperPanel()
+        public TextMeshProUGUI AddNewTextToUpperPanel()
         {
             GameObject newGameObj = Instantiate(_upperPanelTextPrefab, _upperPanelRoundInfo);
             TextMeshProUGUI tempText = newGameObj.GetComponent<TextMeshProUGUI>();
             UpperPanelTextAdjustmen(tempText);
-            return newGameObj;
+            return tempText;
         }
 
         public void UpperPanelTextAdjustmen(TextMeshProUGUI text)
         {
-            if ((_upperPanelTextGameObjects.Count + 1) % 30 == 0)
+            if ((_upperPanelTexts.Count + 1) % _gameSettings.SuperZonePeriod == 0)
             {
-                text.color = Color.yellow;
-                text.fontStyle = FontStyles.Bold;
+                text.color = _superZoneTextSettings.BasicColor;
+                text.fontStyle = _superZoneTextSettings.FontStyle;
             }
-            else if ((_upperPanelTextGameObjects.Count + 1) % 5 == 0)
+            else if ((_upperPanelTexts.Count + 1) % _gameSettings.SafeZonePeriod == 0)
             {
-                text.color = new Color(0.48f, 0.804f, 0.12f, 1);
-                text.fontStyle = FontStyles.Bold;
+                text.color = _safeZoneTextSettings.BasicColor;
+                text.fontStyle = _safeZoneTextSettings.FontStyle;
             }
             else
             {
-                text.color = Color.white;
+                text.color = _basicZoneTextSettings.BasicColor;
             }
-            text.text = (_upperPanelTextGameObjects.Count + 1).ToString();
+            text.text = (_upperPanelTexts.Count + 1).ToString();
         }
 
         public void AdjustCurrentRoundTextAndImage()
         {
-            if (_gameControllerData.CurrentRound % 30 == 0)
+            if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
             {
-                _upperPanelTextGameObjects[_gameControllerData.CurrentRound - 1].GetComponent<TextMeshProUGUI>().color = Color.white;
-                _currentRoundBgImage.sprite = _upperPanelTextData.CurrentRoundBgSpriteAtlas.GetSprite(_upperPanelTextData._spriteAtlasNames[2]);
+                _upperPanelTexts[_gameControllerData.CurrentRound - 1].color = _superZoneTextSettings.CurrentRoundColor;
+                _currentRoundBgImage.sprite = _superZoneTextSettings.CurrentRoundBgSpriteAtlas.GetSprite(_superZoneTextSettings.BackgroundName);
             }
-            else if (_gameControllerData.CurrentRound % 5 == 0)
+            else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
             {
-                _upperPanelTextGameObjects[_gameControllerData.CurrentRound - 1].GetComponent<TextMeshProUGUI>().color = Color.white;
-                _currentRoundBgImage.sprite = _upperPanelTextData.CurrentRoundBgSpriteAtlas.GetSprite(_upperPanelTextData._spriteAtlasNames[1]);
+                _upperPanelTexts[_gameControllerData.CurrentRound - 1].color = _safeZoneTextSettings.CurrentRoundColor;
+                _currentRoundBgImage.sprite = _safeZoneTextSettings.CurrentRoundBgSpriteAtlas.GetSprite(_safeZoneTextSettings.BackgroundName);
             }
             else
             {
-                _upperPanelTextGameObjects[_gameControllerData.CurrentRound - 1].GetComponent<TextMeshProUGUI>().color = Color.white;
-                _currentRoundBgImage.sprite = _upperPanelTextData.CurrentRoundBgSpriteAtlas.GetSprite(_upperPanelTextData._spriteAtlasNames[0]);
+                _upperPanelTexts[_gameControllerData.CurrentRound - 1].color = _basicZoneTextSettings.CurrentRoundColor;
+                _currentRoundBgImage.sprite = _basicZoneTextSettings.CurrentRoundBgSpriteAtlas.GetSprite(_basicZoneTextSettings.BackgroundName);
             }
             
-            if(_gameControllerData.CurrentRound - 1 > 0 && (_gameControllerData.CurrentRound - 1) % 30 == 0)
+            if(_gameControllerData.CurrentRound - 1 > 0 && (_gameControllerData.CurrentRound - 1) % _gameSettings.SuperZonePeriod == 0)
             {
-                _upperPanelTextGameObjects[_gameControllerData.CurrentRound - 2].GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                _upperPanelTexts[_gameControllerData.CurrentRound - 2].color = _superZoneTextSettings.BasicColor;
             }
-            else if (_gameControllerData.CurrentRound - 1 > 0 && (_gameControllerData.CurrentRound - 1) % 5 == 0)
+            else if (_gameControllerData.CurrentRound - 1 > 0 && (_gameControllerData.CurrentRound - 1) % _gameSettings.SafeZonePeriod == 0)
             {
-                _upperPanelTextGameObjects[_gameControllerData.CurrentRound - 2].GetComponent<TextMeshProUGUI>().color = new Color(0.48f, 0.804f, 0.12f, 1);
+                _upperPanelTexts[_gameControllerData.CurrentRound - 2].color = _safeZoneTextSettings.BasicColor;
             }
         }
 
         public void PrepareUpperPanelForNewGame()
         {
-            for (int i = 0; i < _upperPanelTextGameObjects.Count; i++)
+            for (int i = 0; i < _upperPanelTexts.Count; i++)
             {
-                Destroy(_upperPanelTextGameObjects[i]);
+                Destroy(_upperPanelTexts[i].gameObject);
             }
-            _upperPanelTextGameObjects.Clear();
+            _upperPanelTexts.Clear();
 
             _upperPanelRoundInfo.position = _upperPanelPosition.position;
 
-            for (int i = 0; i < _upperPanelTextData.InitialTextCount; i++)
+            for (int i = 0; i < _upperPanelSettings.InitialTextCount; i++)
             {
-                _upperPanelTextGameObjects.Add(AddNewTextToUpperPanel());
+                _upperPanelTexts.Add(AddNewTextToUpperPanel());
             }
 
         }
