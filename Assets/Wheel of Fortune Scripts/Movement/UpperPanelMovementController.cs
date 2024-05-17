@@ -11,16 +11,21 @@ namespace WheelOfFortune.Movement.UpperPanel
         [SerializeField] private Transform _upperPanelRoundInfoNextRoundPositin;
         [SerializeField] private Transform _upperPanelRoundInfoPreviousRoundPosition;
 
-
         public void MoveNextRound()
         {
-            _upperPanelRoundInfo.DOMoveX(_upperPanelRoundInfo.position.x - (_upperPanelRoundInfoNextRoundPositin.position.x - _upperPanelRoundInfoPreviousRoundPosition.position.x) / 2, _upperPanelMovementSettings.NextRoundMovementDuration);
+            Vector3 tempDistance = movementDistanceCalculator(_upperPanelRoundInfoPreviousRoundPosition.position, _upperPanelRoundInfoNextRoundPositin.position);
+            _upperPanelRoundInfo.DOMoveX(_upperPanelRoundInfo.position.x + tempDistance.x, _upperPanelMovementSettings.NextRoundMovementDuration);
         }
 
         public void AdjustPanelPosition()
         {
-            _upperPanelRoundInfo.position = new Vector3(_upperPanelRoundInfo.position.x + (_upperPanelRoundInfoNextRoundPositin.position.x - _upperPanelRoundInfoPreviousRoundPosition.position.x) / 2, _upperPanelRoundInfo.position.y, _upperPanelRoundInfo.position.z);
+            Vector3 tempDistance = movementDistanceCalculator(_upperPanelRoundInfoNextRoundPositin.position, _upperPanelRoundInfoPreviousRoundPosition.position);
+            _upperPanelRoundInfo.position = new Vector3(_upperPanelRoundInfo.position.x + tempDistance.x, _upperPanelRoundInfo.position.y, _upperPanelRoundInfo.position.z);
         }
 
+        public Vector3 movementDistanceCalculator(Vector3 nextPosition, Vector3 previousPosition)
+        {
+            return (nextPosition - previousPosition) / 2;
+        }
     }
 }

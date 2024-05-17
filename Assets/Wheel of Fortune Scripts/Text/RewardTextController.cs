@@ -49,13 +49,13 @@ namespace WheelOfFortune.Texts.Reward
             }
         }
 
-        public GameObject AddNewTextToCollectedItemsPanel(int quantity)
+        public TextMeshProUGUI AddNewTextToCollectedItemsPanel(int quantity)
         {
             GameObject newGameObj = Instantiate(_collectedItemTextPrefab, scrollViewContent);
             TextMeshProUGUI newText = newGameObj.GetComponent<TextMeshProUGUI>();
             newText.color = new Color(newText.color.r, newText.color.g, newText.color.b, 0f);
             RewardTextQuantityAdjustment(newText, quantity);
-            return newGameObj;
+            return newText;
         }
 
         public void CloneText(TextMeshProUGUI clonnedText, TextMeshProUGUI baseText)

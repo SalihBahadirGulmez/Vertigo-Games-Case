@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace WheelOfFortune.Images.Spin
 {
-    [CreateAssetMenu(menuName = "Wheel of Fortune/Image/Spin Base")]
+    [CreateAssetMenu(menuName = "Wheel of Fortune/Image/Spin Base Settings")]
 
-    public class SpinBase : ScriptableObject
+    public class SpinBaseSettings : ScriptableObject
     {
         [SerializeField] private SpriteAtlas _spinBaseSprite;
 

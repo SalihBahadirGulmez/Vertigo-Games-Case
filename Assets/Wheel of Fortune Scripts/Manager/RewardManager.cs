@@ -42,19 +42,19 @@ namespace WheelOfFortune.Manager.Reward
                     _collectedRewardsData[i].Quantity += rewardData.Quantity;
                     _gameControllerData.LastCollectedRewardTextNewValue = _collectedRewardsData[i].Quantity;
 
-                    _gameControllerData.LastCollectedRewardImageGameobject = _collectedRewardsData[i].ImageGameObject;
-                    _gameControllerData.LastCollectedRewardTextGameobject = _collectedRewardsData[i].TextGameObject;
+                    _gameControllerData.LastCollectedRewardImage = _collectedRewardsData[i].ImageGameObject.GetComponent<Image>();
+                    _gameControllerData.LastCollectedRewardText = _collectedRewardsData[i].TextGameObject.GetComponent<TextMeshProUGUI>();
                     return;
                 }
             }
             _gameControllerData.SpinResult = _rewardManagerSettings.WinNewItem;
 
             _collectedRewardsData.Add(rewardData);
-            _gameControllerData.LastCollectedRewardImageGameobject = _rewardImageController.AddNewImageToCollectedItemsPanel(rewardData);
-            _collectedRewardsData[_collectedRewardsData.Count - 1].ImageGameObject = _gameControllerData.LastCollectedRewardImageGameobject;
+            _gameControllerData.LastCollectedRewardImage = _rewardImageController.AddNewImageToCollectedItemsPanel(rewardData);
+            _collectedRewardsData[_collectedRewardsData.Count - 1].ImageGameObject = _gameControllerData.LastCollectedRewardImage.gameObject;
 
-            _gameControllerData.LastCollectedRewardTextGameobject = _rewardTextController.AddNewTextToCollectedItemsPanel(rewardData.Quantity);
-            _collectedRewardsData[_collectedRewardsData.Count - 1].TextGameObject = _gameControllerData.LastCollectedRewardTextGameobject;
+            _gameControllerData.LastCollectedRewardText = _rewardTextController.AddNewTextToCollectedItemsPanel(rewardData.Quantity);
+            _collectedRewardsData[_collectedRewardsData.Count - 1].TextGameObject = _gameControllerData.LastCollectedRewardText.gameObject;
 
             _gameControllerData.LastCollectedRewardTextOldValue = 0;
             _gameControllerData.LastCollectedRewardTextNewValue = rewardData.Quantity;

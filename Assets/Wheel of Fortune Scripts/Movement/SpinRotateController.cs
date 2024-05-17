@@ -13,22 +13,30 @@ namespace WheelOfFortune.Movement.SpinRotate
         [SerializeField] private GameController _gameController;
         [SerializeField] private ButtonManager _buttonManager;
 
+        private int _angleBetweenSlots;
+
+        private void Awake()
+        {
+            _angleBetweenSlots = 360 / _spinRotateSettings.SpinSlotCount;
+        }
         public void RotateSpin()
         {
             _buttonManager.SetButtonStatus(ButtonType.SpinButton, false);
             _buttonManager.SetButtonStatus(ButtonType.ExitButton, false);
-            int tempRandomRotation = Random.Range(_spinRotateSettings.SpinRotateAngleMin, _spinRotateSettings.SpinRotateAngleMax);
-            tempRandomRotation -= tempRandomRotation % 45;
-            int tempRewardSlotNum = (tempRandomRotation / 45) % 8;
+            int tempRandomRotationAngle = Random.Range(_spinRotateSettings.SpinRotateAngleMin, _spinRotateSettings.SpinRotateAngleMax);
+            int tempRewardSlotNum = RewardSlotNumCalculator(ref tempRandomRotationAngle);
             _rewardManager.FindAndCollectReward(tempRewardSlotNum);
-            gameObject.transform.DORotate(new Vector3(0, 0, tempRandomRotation), _spinRotateSettings.SpinRotateDuration, RotateMode.LocalAxisAdd).OnComplete(StartAfterRotation);
+            gameObject.transform.DORotate(new Vector3(0, 0, tempRandomRotationAngle), _spinRotateSettings.SpinRotateDuration, RotateMode.LocalAxisAdd).OnComplete(() =>
+            {
+                _rewardManager._cloneRewardImage.color = new Color(_rewardManager._cloneRewardImage.color.r, _rewardManager._cloneRewardImage.color.g, _rewardManager._cloneRewardImage.color.b, 1f);
+                _rewardManager._cloneRewardText.color = new Color(_rewardManager._cloneRewardText.color.r, _rewardManager._cloneRewardText.color.g, _rewardManager._cloneRewardText.color.b, 1f);
+                _gameController.OpenRewardPanel();
+            });
         }
-
-        public void StartAfterRotation()
+        public int RewardSlotNumCalculator(ref int rotationAngle)
         {
-            _rewardManager._cloneRewardImage.color = new Color(_rewardManager._cloneRewardImage.color.r, _rewardManager._cloneRewardImage.color.g, _rewardManager._cloneRewardImage.color.b, 1f);
-            _rewardManager._cloneRewardText.color = new Color(_rewardManager._cloneRewardText.color.r, _rewardManager._cloneRewardText.color.g, _rewardManager._cloneRewardText.color.b, 1f);
-            _gameController.OpenRewardPanel();
+            rotationAngle -= rotationAngle % _angleBetweenSlots;
+            return (rotationAngle / _angleBetweenSlots) % _spinRotateSettings.SpinSlotCount;
         }
     }
 }

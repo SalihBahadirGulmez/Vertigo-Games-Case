@@ -34,11 +34,11 @@ namespace WheelOfFortune.Manager.GameManager
 
         [SerializeField] private Image _spinBaseImage;
         [SerializeField] private Image _spinIndicatorImage;
-        [SerializeField] private List<SpinBase> _spinBasesSc;
-        [SerializeField] private List<SpinIndicator> _spinIndicatorSc;
+        [SerializeField] private List<SpinBaseSettings> _spinBasesSettings;
+        [SerializeField] private List<SpinIndicatorSettings> _spinIndicatorSettings;
 
-        [SerializeField] private GameObject _cloneRewardImageGameObject;
-        [SerializeField] private GameObject _cloneRewardTextGameObject;
+        [SerializeField] private Image _cloneRewardImage;
+        [SerializeField] private TextMeshProUGUI _cloneRewardText;
 
         [SerializeField] private TextMeshProUGUI _nextSafeZoneText;
         [SerializeField] private TextMeshProUGUI _nextSuperZoneText;
@@ -64,7 +64,7 @@ namespace WheelOfFortune.Manager.GameManager
             PrepareSpinBase();
             FindNextZone();
             _rewardImageController._currentSpinRewardsData.Clear();
-            _rewardsMovementController.MoveCollectedItemPanel(_cloneRewardImageGameObject, _gameControllerData.LastCollectedRewardImageGameobject, _cloneRewardTextGameObject, _gameControllerData.LastCollectedRewardTextGameobject);
+            _rewardsMovementController.MoveCollectedItemPanel(_cloneRewardImage, _gameControllerData.LastCollectedRewardImage, _cloneRewardText, _gameControllerData.LastCollectedRewardText);
             _upperPanelTextController.PrepareUpperPanelForNextRound();
             _upperPanelMovementController.MoveNextRound();
             _rewardImageController.RandomSpinRewardAdjustment();
@@ -74,19 +74,19 @@ namespace WheelOfFortune.Manager.GameManager
         public void PrepareNewGame()
         {
             _endGamePanle.SetActive(false);
-            _rewardsMovementController.MoveAfterRestrart(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
+            _rewardsMovementController.MoveAfterRestrart(_cloneRewardImage, _cloneRewardText);
             _gameControllerData.CurrentRound = 1;
             _parentSpinBaseTransform.rotation = Quaternion.Euler(0, 0, 0);
             PrepareSpinBase();
             FindNextZone();
             _upperPanelTextController.PrepareUpperPanelForNewGame();
             _rewardImageController._currentSpinRewardsData.Clear();
-            DleteCollectedRewards(_rewardManager._collectedRewardsData);
+            DeleteCollectedRewards(_rewardManager._collectedRewardsData);
             _rewardImageController.RandomSpinRewardAdjustment();
             _rewardTextController.RewardQuantityCalculator();
         }
 
-        public void DleteCollectedRewards(List<RewardData> collectedRewards)
+        public void DeleteCollectedRewards(List<RewardData> collectedRewards)
         {
             for (int i = 0; i < collectedRewards.Count; i++)
             {
@@ -100,22 +100,22 @@ namespace WheelOfFortune.Manager.GameManager
         {
             if (_gameControllerData.SpinResult == _rewardManagerSettings.WinNewItem)
             {
-                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
+                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImage, _cloneRewardText);
             }
             else if (_gameControllerData.SpinResult == _rewardManagerSettings.WinSameItem)
             { 
-                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
+                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImage, _cloneRewardText);
             }
             else if(_gameControllerData.SpinResult == _rewardManagerSettings.GameOver)
             {
-                _rewardsMovementController.MoveEndGamePanel(_cloneRewardImageGameObject);
+                _rewardsMovementController.MoveEndGamePanel(_cloneRewardImage);
             }               
         }
 
         public void PrepareSpinBase()
         {
-            _spinBasesSc.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinBaseImage));
-            _spinIndicatorSc.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinIndicatorImage));
+            _spinBasesSettings.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinBaseImage));
+            _spinIndicatorSettings.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinIndicatorImage));
         }
 
         public void FindNextZone()

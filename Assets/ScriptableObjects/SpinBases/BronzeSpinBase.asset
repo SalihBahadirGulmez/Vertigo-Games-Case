@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BronzeSpinBase
   m_EditorClassIdentifier: 
   _spinBaseSprite: {fileID: 100100200, guid: d5872d1d5e4daf14d85e640c01147543, type: 3}
-  _spinBaseName: ui_spin_bronze_indicator
+  _spinBaseName: ui_spin_bronze_base
   _activeRound: 1
   _passiveRound: 5
   _width: 900

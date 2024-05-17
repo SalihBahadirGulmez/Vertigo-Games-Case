@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WheelOfFortune.Movement.RewardsMovement
@@ -12,14 +10,8 @@ namespace WheelOfFortune.Movement.RewardsMovement
         [SerializeField] private float _rewardsMovementObtainedToCollectedDuration = 0.5f;
         [SerializeField] private float _rewardsSizeScale = 5f;
 
-
-
-
-
         public float RewardsMovementSpinToObtainedDuration { get { return _rewardsMovementSpinToObtainedDuration; } }
         public float RewardsMovementObtainedToCollectedDuration { get { return _rewardsMovementObtainedToCollectedDuration; } }
         public float RewardsSizeScale { get { return _rewardsSizeScale; } }
-
-
     }
 }

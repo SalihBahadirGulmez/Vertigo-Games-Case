@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace WheelOfFortune.Manager.GameManager
 {
@@ -7,8 +9,8 @@ namespace WheelOfFortune.Manager.GameManager
     {
         [SerializeField] private int _currentRound = 1;
         [SerializeField] private string _spinResult;
-        [SerializeField] private GameObject _lastCollectedRewardImageGameobject;
-        [SerializeField] private GameObject _lastCollectedRewardTextGameobject;
+        [SerializeField] private Image _lastCollectedRewardImage;
+        [SerializeField] private TextMeshProUGUI _lastCollectedRewardText;
 
         [SerializeField] private int _lastCollectedRewardTextOldValue;
         [SerializeField] private int _lastCollectedRewardTextNewValue;
@@ -16,8 +18,8 @@ namespace WheelOfFortune.Manager.GameManager
 
         public int CurrentRound { get { return _currentRound; } set { _currentRound = value; } }
         public string SpinResult { get { return _spinResult; }set { _spinResult = value; } }
-        public GameObject LastCollectedRewardImageGameobject { get { return _lastCollectedRewardImageGameobject; } set { _lastCollectedRewardImageGameobject = value; } }
-        public GameObject LastCollectedRewardTextGameobject { get { return _lastCollectedRewardTextGameobject; } set { _lastCollectedRewardTextGameobject = value; } }
+        public Image LastCollectedRewardImage { get { return _lastCollectedRewardImage; } set { _lastCollectedRewardImage = value; } }
+        public TextMeshProUGUI LastCollectedRewardText { get { return _lastCollectedRewardText; } set { _lastCollectedRewardText = value; } }
         public int LastCollectedRewardTextOldValue { get { return _lastCollectedRewardTextOldValue; } set { _lastCollectedRewardTextOldValue = value; } }
         public int LastCollectedRewardTextNewValue { get { return _lastCollectedRewardTextNewValue; } set { _lastCollectedRewardTextNewValue = value; } }
 

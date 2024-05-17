@@ -76,7 +76,7 @@ namespace WheelOfFortune.Images.Reward
             _currentSpinRewardsData.Add(new RewardData(item));
         }
 
-        public GameObject AddNewImageToCollectedItemsPanel(RewardData rewardData)
+        public Image AddNewImageToCollectedItemsPanel(RewardData rewardData)
         {
             GameObject newGameObj = Instantiate(_collectedItemImagePrefab, scrollViewContent);
             Image newImage = newGameObj.GetComponent<Image>();
@@ -84,7 +84,7 @@ namespace WheelOfFortune.Images.Reward
 
             newImage.sprite = rewardData.ItemUiProperties.SpriteAtlas.GetSprite(rewardData.ItemUiProperties.Name);
             newImage.color = new Color(newImage.color.r, newImage.color.g, newImage.color.b, 0f);
-            return newGameObj;
+            return newImage;
         }
 
         public void CloneImage(Image clonnedImage, Image baseImage)

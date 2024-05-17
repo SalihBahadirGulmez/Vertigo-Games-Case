@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -22,30 +20,23 @@ namespace WheelOfFortune.Movement.RewardsMovement
         [SerializeField] private GameObject _endGameRestartButton;
         [SerializeField] private GameObject _endGameLeaveButton;
 
-
         [SerializeField] private Transform _minMovePosition;
         [SerializeField] private Transform _maxMovePosition;
 
         [SerializeField] private Transform _rewardTextPanelPos;
 
-
-        
-
-        public void MoveObtainedItemPanel(GameObject cloneRewardImage, GameObject cloneRewardText)
+        public void MoveObtainedItemPanel(Image cloneRewardImage, TextMeshProUGUI cloneRewardText)
         {
-
             _obtainedItemPanel.SetActive(true);
             cloneRewardImage.transform.DOMove(_obtainedItemPanel.transform.position, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
             cloneRewardImage.transform.DOScale(cloneRewardImage.transform.localScale * _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration).OnComplete(() =>
             {
                 _buttonManager.SetButtonStatus(ButtonType.ObtainedItemPanelButton, true);
             });
-
             cloneRewardText.transform.DOMove(_rewardTextPanelPos.position, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
             cloneRewardText.transform.DOScale(cloneRewardText.transform.localScale * _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
-
         }
-        public void MoveEndGamePanel(GameObject cloneRewardImage)
+        public void MoveEndGamePanel(Image cloneRewardImage)
         {
             _endGamePanel.SetActive(true);
             cloneRewardImage.transform.DOMove(_endGamePanel.transform.position, _rewardsMovementSettings.RewardsMovementSpinToObtainedDuration);
@@ -53,58 +44,51 @@ namespace WheelOfFortune.Movement.RewardsMovement
             {
                 _endGameRestartButton.SetActive(true);
                 _endGameLeaveButton.SetActive(true);
-
             });
         }
-        public void MoveAfterRestrart(GameObject cloneRewardImage, GameObject cloneRewardText)
+        public void MoveAfterRestrart(Image cloneRewardImage, TextMeshProUGUI cloneRewardText)
         {
-            cloneRewardText.GetComponent<TextMeshProUGUI>().color = new Color(cloneRewardText.GetComponent<TextMeshProUGUI>().color.r, cloneRewardText.GetComponent<TextMeshProUGUI>().color.g, cloneRewardText.GetComponent<TextMeshProUGUI>().color.b, 0f);
+            cloneRewardText.color = new Color(cloneRewardText.color.r, cloneRewardText.color.g, cloneRewardText.color.b, 0f);
             cloneRewardImage.transform.DOScale(new Vector3(0, 0, 0), _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration).OnComplete(() =>
             {
-                cloneRewardImage.GetComponent<Image>().color = new Color(cloneRewardImage.GetComponent<Image>().color.r, cloneRewardImage.GetComponent<Image>().color.g, cloneRewardImage.GetComponent<Image>().color.b, 0f);
+                cloneRewardImage.color = new Color(cloneRewardImage.color.r, cloneRewardImage.color.g, cloneRewardImage.color.b, 0f);
                 _buttonManager.SetButtonStatus(ButtonType.SpinButton, true);
                 _buttonManager.SetButtonStatus(ButtonType.ExitButton, true);
             });
         }
-
-        public void MoveCollectedItemPanel(GameObject cloneRewardImage, GameObject panelReward, GameObject cloneRewardText, GameObject panelRewardText)
+        public void MoveCollectedItemPanel(Image cloneRewardImage, Image collectedRewardImage, TextMeshProUGUI cloneRewardText, TextMeshProUGUI collectedRewardText)
         {
-
-            ClampedMovement(cloneRewardImage, panelReward, _minMovePosition.position.y, _maxMovePosition.position.y);
-            ClampedMovement(cloneRewardText, panelRewardText, _minMovePosition.position.y, _maxMovePosition.position.y);
+            ClampedMovement(cloneRewardImage.gameObject, collectedRewardImage.gameObject, _minMovePosition.position.y, _maxMovePosition.position.y);
+            ClampedMovement(cloneRewardText.gameObject, collectedRewardText.gameObject, _minMovePosition.position.y, _maxMovePosition.position.y);
 
             cloneRewardImage.transform.DOScale(cloneRewardImage.transform.localScale / _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration).OnComplete(() =>
             {
-                panelReward.GetComponent<Image>().color = new Color(panelReward.GetComponent<Image>().color.r, panelReward.GetComponent<Image>().color.g, panelReward.GetComponent<Image>().color.b, 1f);
-                cloneRewardImage.GetComponent<Image>().color = new Color(cloneRewardImage.GetComponent<Image>().color.r, cloneRewardImage.GetComponent<Image>().color.g, cloneRewardImage.GetComponent<Image>().color.b, 0f);
+                collectedRewardImage.color = new Color(collectedRewardImage.color.r, collectedRewardImage.color.g, collectedRewardImage.color.b, 1f);
+                cloneRewardImage.color = new Color(cloneRewardImage.color.r, cloneRewardImage.color.g, cloneRewardImage.color.b, 0f);
                 _buttonManager.SetButtonStatus(ButtonType.SpinButton, true);
                 _buttonManager.SetButtonStatus(ButtonType.ExitButton, true);
             });
             cloneRewardText.transform.DOScale(cloneRewardText.transform.localScale / _rewardsMovementSettings.RewardsSizeScale, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration).OnComplete(() =>
             {
-                panelRewardText.GetComponent<TextMeshProUGUI>().color = new Color(panelRewardText.GetComponent<TextMeshProUGUI>().color.r, panelRewardText.GetComponent<TextMeshProUGUI>().color.g, panelRewardText.GetComponent<TextMeshProUGUI>().color.b, 1f);
-                cloneRewardText.GetComponent<TextMeshProUGUI>().color = new Color(cloneRewardText.GetComponent<TextMeshProUGUI>().color.r, cloneRewardText.GetComponent<TextMeshProUGUI>().color.g, cloneRewardText.GetComponent<TextMeshProUGUI>().color.b, 0f);
-                StartCoroutine(_rewardTextController.UpdateTextValue(panelRewardText.GetComponent<TextMeshProUGUI>(), _gameControllerData.LastCollectedRewardTextOldValue, _gameControllerData.LastCollectedRewardTextNewValue));
+                collectedRewardText.color = new Color(collectedRewardText.color.r, collectedRewardText.color.g, collectedRewardText.color.b, 1f);
+                cloneRewardText.color = new Color(cloneRewardText.color.r, cloneRewardText.color.g, cloneRewardText.color.b, 0f);
+                StartCoroutine(_rewardTextController.UpdateTextValue(collectedRewardText, _gameControllerData.LastCollectedRewardTextOldValue, _gameControllerData.LastCollectedRewardTextNewValue));
             });
         }
-
-        public void ClampedMovement(GameObject obj, GameObject desttination, float min, float max)
+        public void ClampedMovement(GameObject movingObj, GameObject desttination, float min, float max)
         {
             if (min > desttination.transform.position.y)
             {
-                obj.transform.DOMove(_minMovePosition.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
+                movingObj.transform.DOMove(_minMovePosition.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
             }
             else if (max < desttination.transform.position.y)
             {
-                obj.transform.DOMove(_maxMovePosition.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
+                movingObj.transform.DOMove(_maxMovePosition.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
             }
             else
             {
-                obj.transform.DOMove(desttination.transform.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
+                movingObj.transform.DOMove(desttination.transform.position, _rewardsMovementSettings.RewardsMovementObtainedToCollectedDuration);
             }
         }
-
-       
-        
     }
 }
