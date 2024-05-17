@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WheelOfFortune.Images.Item;
 using WheelOfFortune.Manager.GameManager;
+using WheelOfFortune.Manager.Reward;
 
 namespace WheelOfFortune.Images.Reward
 {
@@ -13,6 +14,7 @@ namespace WheelOfFortune.Images.Reward
         [SerializeField] internal ItemUiProperties _bombUiProperties;
         [SerializeField] private GameControllerData _gameControllerData;
         [SerializeField] private GameSettings _gameSettings;
+        [SerializeField] private RewardManagerSettings _rewardManagerSettings;
 
         [SerializeField] internal Image[] _spinRewards;
 
@@ -37,15 +39,15 @@ namespace WheelOfFortune.Images.Reward
             ItemsByTier tempItems;
             if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
             {
-                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforSuperZone);
+                tempItems = _itemsByTier.Find(x => x.Tier == _rewardManagerSettings.ItemTierforSuperZone);
             }
             else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
             {
-                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforSafeZone);
+                tempItems = _itemsByTier.Find(x => x.Tier == _rewardManagerSettings.ItemTierforSafeZone);
             }
             else
             {
-                tempItems = _itemsByTier.Find(x => x.Tier == _gameSettings.ItemTierforNormalZone);
+                tempItems = _itemsByTier.Find(x => x.Tier == _rewardManagerSettings.ItemTierforNormalZone);
             }
             for (int i = 0; i < _spinRewards.Length; i++)
             {
@@ -55,9 +57,9 @@ namespace WheelOfFortune.Images.Reward
                     SpriteAdjustment(_spinRewards[i], _bombUiProperties);
                     continue;
                 }
-                int tempRandomSizeNum = Random.Range(0, tempItems.ItemsUiProperties.Count);
-                ImageSizeAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomSizeNum]);
-                SpriteAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomSizeNum]);
+                int tempRandomItem = Random.Range(0, tempItems.ItemsUiProperties.Count);
+                ImageSizeAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomItem]);
+                SpriteAdjustment(_spinRewards[i], tempItems.ItemsUiProperties[tempRandomItem]);
             }
         }
 

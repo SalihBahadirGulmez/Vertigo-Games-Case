@@ -6,13 +6,21 @@ namespace WheelOfFortune.Manager.Reward
  
     public class RewardManagerSettings : ScriptableObject
     {
-        [SerializeField]private int _maxTierForSuperZone = 3;
-        [SerializeField]private int _maxTierForSafeZone = 2;
-        [SerializeField]private int _maxTierForBasicZone = 1;
+        [SerializeField] private int _itemTierforSuperZone = 3;
+        [SerializeField] private int _itemTierforSafeZone = 2;
+        [SerializeField] private int _itemTierforNormalZone = 1;
 
-        public int MaxTierForSuperZone { get { return _maxTierForSuperZone; } }
-        public int MaxTierForSafeZone { get { return _maxTierForSafeZone; } }
-        public int MaxTierForBasicZone { get { return _maxTierForBasicZone; } }
+        [SerializeField] private string _gameOver = "Game Over";
+        [SerializeField] private string _winSameItem = "WinSameItem";
+        [SerializeField] private string _winNewItem = "WinNewItem";
+
+
+        public int ItemTierforSuperZone { get { return _itemTierforSuperZone; } }
+        public int ItemTierforSafeZone { get { return _itemTierforSafeZone; } }
+        public int ItemTierforNormalZone { get { return _itemTierforNormalZone; } }
+        public string GameOver { get { return _gameOver; } }
+        public string WinSameItem { get { return _winSameItem; } }
+        public string WinNewItem { get { return _winNewItem; } }
 
     }
 }

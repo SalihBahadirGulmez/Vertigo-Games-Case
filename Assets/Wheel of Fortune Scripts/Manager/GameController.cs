@@ -8,6 +8,9 @@ using WheelOfFortune.Texts.Reward;
 using WheelOfFortune.Texts.UpperPanel;
 using WheelOfFortune.Manager.Reward;
 using WheelOfFortune.Manager.Button;
+using WheelOfFortune.Images.Item;
+using WheelOfFortune.Images.Spin;
+using UnityEngine.UI;
 
 namespace WheelOfFortune.Manager.GameManager
 {
@@ -22,20 +25,24 @@ namespace WheelOfFortune.Manager.GameManager
         [SerializeField] private UpperPanelMovementController _upperPanelMovementController;
         [SerializeField] private ButtonManager _buttonManager;
         [SerializeField] private GameSettings _gameSettings;
+        [SerializeField] private RewardManagerSettings _rewardManagerSettings;
+
 
         [SerializeField] private GameObject _obtainedItemPanel;
         [SerializeField] private GameObject _endGamePanle;
         [SerializeField] private Transform _parentSpinBaseTransform;
 
-        [SerializeField] private GameObject[] _bronzeSpinTransform;
-        [SerializeField] private GameObject[] _silverSpinTransform;
-        [SerializeField] private GameObject[] _goldSpinTransform;
+        [SerializeField] private Image _spinBaseImage;
+        [SerializeField] private Image _spinIndicatorImage;
+        [SerializeField] private List<SpinBase> _spinBasesSc;
+        [SerializeField] private List<SpinIndicator> _spinIndicatorSc;
 
         [SerializeField] private GameObject _cloneRewardImageGameObject;
         [SerializeField] private GameObject _cloneRewardTextGameObject;
 
         [SerializeField] private TextMeshProUGUI _nextSafeZoneText;
         [SerializeField] private TextMeshProUGUI _nextSuperZoneText;
+
 
         public void Start()
         {
@@ -91,61 +98,24 @@ namespace WheelOfFortune.Manager.GameManager
 
         public void OpenRewardPanel()
         {
-            switch (_gameControllerData.SpinResult)
+            if (_gameControllerData.SpinResult == _rewardManagerSettings.WinNewItem)
             {
-                case "WinNewItem":
-                    _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
-
-                    break;
-                case "WinSameItem":
-                    _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
-
-                    break;
-                case "Lose":
-                    _rewardsMovementController.MoveEndGamePanel(_cloneRewardImageGameObject);
-                    break;
+                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
             }
+            else if (_gameControllerData.SpinResult == _rewardManagerSettings.WinSameItem)
+            { 
+                _rewardsMovementController.MoveObtainedItemPanel(_cloneRewardImageGameObject, _cloneRewardTextGameObject);
+            }
+            else if(_gameControllerData.SpinResult == _rewardManagerSettings.GameOver)
+            {
+                _rewardsMovementController.MoveEndGamePanel(_cloneRewardImageGameObject);
+            }               
         }
 
         public void PrepareSpinBase()
         {
-            if (_gameControllerData.CurrentRound % _gameSettings.SuperZonePeriod == 0)
-            {
-                for (int i = 0; i < _bronzeSpinTransform.Length; i++)
-                {
-                    _bronzeSpinTransform[i].SetActive(false);
-                }
-                for (int i = 0; i < _goldSpinTransform.Length; i++)
-                {
-                    _goldSpinTransform[i].SetActive(true);
-                }
-            }
-            else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
-            {
-                for (int i = 0; i < _bronzeSpinTransform.Length; i++)
-                {
-                    _bronzeSpinTransform[i].SetActive(false);
-                }
-                for (int i = 0; i < _silverSpinTransform.Length; i++)
-                {
-                    _silverSpinTransform[i].SetActive(true);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < _bronzeSpinTransform.Length; i++)
-                {
-                    _bronzeSpinTransform[i].SetActive(true);
-                }
-                for (int i = 0; i < _silverSpinTransform.Length; i++)
-                {
-                    _silverSpinTransform[i].SetActive(false);
-                }
-                for (int i = 0; i < _goldSpinTransform.Length; i++)
-                {
-                    _goldSpinTransform[i].SetActive(false);
-                }
-            }
+            _spinBasesSc.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinBaseImage));
+            _spinIndicatorSc.ForEach(x => x.PrepareSpinBase(_gameControllerData.CurrentRound, _spinIndicatorImage));
         }
 
         public void FindNextZone()
@@ -154,7 +124,8 @@ namespace WheelOfFortune.Manager.GameManager
             {
                 _nextSuperZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SuperZonePeriod).ToString();
                 _nextSafeZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SafeZonePeriod).ToString();
-            }else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
+            }
+            else if (_gameControllerData.CurrentRound % _gameSettings.SafeZonePeriod == 0)
             {
                 _nextSafeZoneText.text = (_gameControllerData.CurrentRound + _gameSettings.SafeZonePeriod).ToString();
             }
