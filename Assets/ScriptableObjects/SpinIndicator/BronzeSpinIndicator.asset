@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5dc89fba9b334b814628ea686427a, type: 3}
+  m_Name: BronzeSpinIndicator
+  m_EditorClassIdentifier: 
+  _spinIndicatorSprite: {fileID: 100100200, guid: ca272822e91f21f48b049ee5a6983f16, type: 3}
+  _spinIndicatorName: ui_spin_bronze_indicator
+  _activeRound: 1
+  _passiveRound: 5
+  _width: 123.98
+  _height: 169.34
+  _scaleX: 1
+  _scaleY: 1
+  _posX: 0
+  _posY: 365
