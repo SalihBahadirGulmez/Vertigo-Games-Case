@@ -957,13 +957,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6de83480d874648b7fbd053cde016b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rewardImageSettings: {fileID: 11400000, guid: 935164980aa522746a09cc74ef574317, type: 2}
+  _rewardManagerSettings: {fileID: 11400000, guid: 5cfaea07c038bd74d899faa9e5066a90, type: 2}
   _rewardImageController: {fileID: 185117704}
   _rewardTextController: {fileID: 185117703}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
   _cloneRewardImage: {fileID: 1643835592}
   _cloneRewardText: {fileID: 1216214065}
-  _collectedRewardsTexts: []
 --- !u!224 &185117702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1079,6 +1078,7 @@ MonoBehaviour:
   _bombUiProperties: {fileID: 11400000, guid: 8fcd7fc077bfee04f9e573f0ea7d3e97, type: 2}
   _gameControllerData: {fileID: 11400000, guid: 28c351ea5c017694388da703244c6cb8, type: 2}
   _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
+  _rewardManagerSettings: {fileID: 11400000, guid: 5cfaea07c038bd74d899faa9e5066a90, type: 2}
   _spinRewards:
   - {fileID: 1464231280}
   - {fileID: 1503988086}
@@ -2241,18 +2241,20 @@ MonoBehaviour:
   _upperPanelMovementController: {fileID: 1641429778}
   _buttonManager: {fileID: 364088395}
   _gameSettings: {fileID: 11400000, guid: 4ecbd5098d93fa44eb9962c467ff4e3e, type: 2}
+  _rewardManagerSettings: {fileID: 11400000, guid: 5cfaea07c038bd74d899faa9e5066a90, type: 2}
   _obtainedItemPanel: {fileID: 152157429}
   _endGamePanle: {fileID: 553987207}
   _parentSpinBaseTransform: {fileID: 185117702}
-  _bronzeSpinTransform:
-  - {fileID: 258207868}
-  - {fileID: 679084134}
-  _silverSpinTransform:
-  - {fileID: 116187684}
-  - {fileID: 136804395}
-  _goldSpinTransform:
-  - {fileID: 74704120}
-  - {fileID: 966400708}
+  _spinBaseImage: {fileID: 258207870}
+  _spinIndicatorImage: {fileID: 679084136}
+  _spinBasesSc:
+  - {fileID: 11400000, guid: b81f380da4914f84ba11132d19859601, type: 2}
+  - {fileID: 11400000, guid: 9cd3867784c5c0048bc7a131f94cea13, type: 2}
+  - {fileID: 11400000, guid: 41e4b3ada1e2fc746b1ce7d4e193a9de, type: 2}
+  _spinIndicatorSc:
+  - {fileID: 11400000, guid: e324cdb943293614f96ffb50ce9698af, type: 2}
+  - {fileID: 11400000, guid: ee1b9f90c93fcd7459bd239596918d98, type: 2}
+  - {fileID: 11400000, guid: d335b8287dfb34a429725fb47225264c, type: 2}
   _cloneRewardImageGameObject: {fileID: 1643835590}
   _cloneRewardTextGameObject: {fileID: 1216214063}
   _nextSafeZoneText: {fileID: 1607136290}
@@ -4011,7 +4013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.75, y: 0}
+  m_AnchoredPosition: {x: 2.75, y: -0.000030517578}
   m_SizeDelta: {x: 150, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1340066067
@@ -6158,7 +6160,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1323132030}
   m_HandleRect: {fileID: 1323132029}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
